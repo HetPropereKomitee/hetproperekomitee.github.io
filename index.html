@@ -1,70 +1,311 @@
 <!doctype html>
 <html lang="nl">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Wetboek Sluikstort & Stickers</title>
+  <meta name="description" content="Online versie (laatste PDF + klikbare links) van het Wetboek Sluikstort & Stickers." />
+  <style>
+    :root{
+      --bg:#0b1220;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --text:#111827;
+      --line:#e5e7eb;
+      --accent:#111827;
+      --shadow: 0 10px 30px rgba(0,0,0,.12);
+      --radius:16px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background: radial-gradient(1200px 600px at 20% 0%, #1f2a44 0%, var(--bg) 55%, #070b14 100%);
+      color:#f9fafb;
+      line-height:1.5;
+    }
+    .wrap{
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 28px 16px 40px;
+    }
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom: 18px;
+      opacity:.95;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:700;
+      letter-spacing:.2px;
+    }
+    .badge{
+      font-size:12px;
+      padding:6px 10px;
+      border:1px solid rgba(255,255,255,.18);
+      border-radius:999px;
+      opacity:.9;
+      white-space:nowrap;
+    }
+    .hero{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 18px;
+      align-items: stretch;
+      margin-bottom: 18px;
+    }
+    @media (max-width: 780px){
+      .hero{grid-template-columns:1fr}
+    }
+    .card{
+      background: var(--card);
+      color: var(--text);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,.12);
+    }
+    .card-header{
+      padding: 18px 18px 0 18px;
+    }
+    h1{
+      margin:0 0 8px 0;
+      font-size: 22px;
+      line-height:1.25;
+      letter-spacing:.2px;
+    }
+    .sub{
+      margin:0 0 16px 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .card-body{
+      padding: 0 18px 18px 18px;
+    }
+    .actions{
+      display:grid;
+      gap:10px;
+      margin: 8px 0 8px;
+    }
+    .btn{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      text-decoration:none;
+      color: var(--text);
+      background: #ffffff;
+      transition: transform .06s ease, box-shadow .12s ease, border-color .12s ease;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      border-color:#cbd5e1;
+      box-shadow: 0 10px 22px rgba(17,24,39,.08);
+    }
+    .btn strong{font-weight:700}
+    .btn small{color: var(--muted)}
+    .btn-primary{
+      border-color: rgba(17,24,39,.18);
+      background: #111827;
+      color: #fff;
+    }
+    .btn-primary small{color: rgba(255,255,255,.75)}
+    .note{
+      margin: 10px 0 0;
+      font-size: 12.5px;
+      color: var(--muted);
+    }
+    .side{
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+    }
+    .side .box{
+      padding: 18px;
+    }
+    .kpi{
+      display:grid;
+      gap:10px;
+      padding: 16px 18px 18px;
+      border-top: 1px solid var(--line);
+      background: #f9fafb;
+    }
+    .kpi-row{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      font-size:13px;
+      color: var(--muted);
+    }
+    .kpi-row b{color: var(--text)}
+    .section{
+      margin-top: 18px;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    .section h2{
+      margin:0;
+      font-size: 14px;
+      color: rgba(255,255,255,.92);
+      letter-spacing:.2px;
+      font-weight:700;
+    }
+    .links-card{
+      padding: 16px 18px 18px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: var(--radius);
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 14px;
+      margin-top: 10px;
+    }
+    @media (max-width: 780px){
+      .grid{grid-template-columns:1fr}
+    }
+    .linkitem{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.10);
+      text-decoration:none;
+      color:#fff;
+    }
+    .linkitem:hover{border-color: rgba(255,255,255,.22)}
+    .linkitem span{opacity:.82; font-size:12.5px}
+    .linkitem strong{font-size:13.5px}
+    footer{
+      margin-top: 18px;
+      opacity:.75;
+      font-size: 12.5px;
+      color:#e5e7eb;
+    }
+    footer a{color:#e5e7eb}
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;}
+  </style>
 </head>
-<body style="font-family:system-ui;max-width:720px;margin:24px auto;padding:0 16px;line-height:1.5;">
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <span>Het Propere Komitee</span>
+        <span class="badge">Online naslagwerk</span>
+      </div>
+      <div class="badge mono">hetproperekomitee.github.io</div>
+    </div>
 
-  <h1 style="margin:0 0 8px 0;">Wetboek Sluikstort &amp; Stickers</h1>
-  <p style="margin:0 0 16px 0;opacity:.85;">Online versie (laatste PDF + klikbare links).</p>
+    <div class="hero">
+      <!-- Main card -->
+      <div class="card">
+        <div class="card-header">
+          <h1>Wetboek Sluikstort &amp; Stickers</h1>
+          <p class="sub">Laatste versie (PDF) + snelle toegang tot de belangrijkste officiële bronnen.</p>
+        </div>
 
-  <!-- PDF knoppen -->
-  <p style="margin:0 0 10px 0;">
-    <a href="LATEST.pdf?v=2026-01-01-1" download
-       style="display:block;padding:12px 14px;border:1px solid #000;border-radius:10px;text-decoration:none;">
-      📄 Download de laatste PDF (aanrader)
-    </a>
-  </p>
+        <div class="card-body">
+          <div class="actions">
+            <!-- Pas hier bij updates enkel de v= parameter aan -->
+            <a class="btn btn-primary" href="LATEST.pdf?v=2026-01-01-1" download>
+              <div>
+                <strong>📄 Download de laatste PDF</strong><br/>
+                <small>Aanrader op smartphone (meest stabiel)</small>
+              </div>
+              <div aria-hidden="true">→</div>
+            </a>
 
-  <p style="margin:0 0 18px 0;">
-    <a href="LATEST.pdf?v=2026-01-01-1"
-       style="display:block;padding:12px 14px;border:1px solid #000;border-radius:10px;text-decoration:none;">
-      📄 Open in browser (kan trager zijn)
-    </a>
-  </p>
+            <a class="btn" href="LATEST.pdf?v=2026-01-01-1">
+              <div>
+                <strong>📄 Open in browser</strong><br/>
+                <small>Kan trager zijn of vastlopen afhankelijk van je viewer</small>
+              </div>
+              <div aria-hidden="true">↗</div>
+            </a>
+          </div>
 
-  <p style="margin:0;opacity:.75;font-size:.95em;">v1.0 — 01/01/2026</p>
-  <p style="margin:6px 0 0 0;opacity:.65;font-size:.9em;">
-    Tip: als openen in browser vastloopt, gebruik “Download”.
-  </p>
+          <p class="note">
+            Tip: als “Open in browser” problemen geeft, gebruik “Download” en open het bestand in een PDF-app (bv. Adobe Acrobat).
+          </p>
+        </div>
 
-  <hr style="margin:22px 0;">
+        <div class="kpi">
+          <div class="kpi-row"><span>Versie</span><b>v1.0</b></div>
+          <div class="kpi-row"><span>Datum</span><b>01/01/2026</b></div>
+          <div class="kpi-row"><span>Bestand</span><b>LATEST.pdf</b></div>
+        </div>
+      </div>
 
-  <!-- Belangrijkste links -->
-  <h2 style="margin:0 0 10px 0;font-size:1.1em;">Belangrijkste links</h2>
-  <ul style="margin:0 0 18px 18px;padding:0;">
-    <li><a href="https://www.ivago.be/" target="_blank" rel="noopener">IVAGO — info &amp; afvalophaling</a></li>
-    <li><a href="https://stad.gent/" target="_blank" rel="noopener">Stad Gent — startpagina</a></li>
+      <!-- Side card -->
+      <div class="card side">
+        <div class="box">
+          <h1 style="font-size:16px;margin:0 0 8px 0;">Waarvoor dient dit?</h1>
+          <p style="margin:0;color:var(--muted);font-size:13.5px;">
+            Deze pagina is de vaste QR-bestemming uit het gedrukte wetboek.
+            De knop “Download” leidt altijd naar de meest recente PDF.
+          </p>
+        </div>
+        <div class="kpi">
+          <div class="kpi-row"><span>QR-link</span><b class="mono">/</b></div>
+          <div class="kpi-row"><span>Directe PDF</span><b class="mono">/LATEST.pdf</b></div>
+        </div>
+      </div>
+    </div>
 
-    <li style="margin-top:10px;">
-      <strong>Reglementen (Stad Gent):</strong>
-      <ul style="margin:6px 0 0 18px;padding:0;">
-        <li><a href="https://stad.gent/nl/reglementen/politiereglement-op-de-reinheid-en-de-gezondheid-de-gemeente" target="_blank" rel="noopener">
-          Politiereglement reinheid &amp; gezondheid</a></li>
-        <li><a href="https://stad.gent/nl/reglementen/politiereglement-op-het-ophalen-van-huishoudelijke-afvalstoffen" target="_blank" rel="noopener">
-          Politiereglement ophalen huishoudelijke afvalstoffen</a></li>
-        <li><a href="https://stad.gent/nl/reglementen/algemeen-reglement-op-de-gemeentelijke-administratieve-sancties" target="_blank" rel="noopener">
-          Algemeen GAS-reglement</a></li>
-      </ul>
-    </li>
+    <div class="section">
+      <h2>Belangrijkste links</h2>
+      <div class="links-card">
+        <div class="grid">
+          <a class="linkitem" href="https://www.ivago.be/" target="_blank" rel="noopener">
+            <strong>IVAGO</strong>
+            <span>Info &amp; afvalophaling</span>
+          </a>
 
-    <li style="margin-top:10px;">
-      <strong>Privacy:</strong>
-      <ul style="margin:6px 0 0 18px;padding:0;">
-        <li><a href="https://www.gegevensbeschermingsautoriteit.be/" target="_blank" rel="noopener">
-          Gegevensbeschermingsautoriteit (GBA)</a></li>
-      </ul>
-    </li>
-  </ul>
+          <a class="linkitem" href="https://stad.gent/" target="_blank" rel="noopener">
+            <strong>Stad Gent</strong>
+            <span>Startpagina</span>
+          </a>
 
-  <hr style="margin:22px 0;">
+          <a class="linkitem" href="https://stad.gent/nl/reglementen/politiereglement-op-de-reinheid-en-de-gezondheid-de-gemeente" target="_blank" rel="noopener">
+            <strong>Politiereglement reinheid &amp; gezondheid</strong>
+            <span>Officiële reglementpagina</span>
+          </a>
 
-  <!-- Optioneel -->
-  <p style="margin:0;opacity:.7;font-size:.9em;">
-    Opmerking: dit is een informatief naslagwerk. Voor officiële procedures gelden de publicaties van Stad Gent/IVAGO.
-  </p>
+          <a class="linkitem" href="https://stad.gent/nl/reglementen/politiereglement-op-het-ophalen-van-huishoudelijke-afvalstoffen" target="_blank" rel="noopener">
+            <strong>Ophalen huishoudelijke afvalstoffen</strong>
+            <span>Officiële reglementpagina</span>
+          </a>
 
+          <a class="linkitem" href="https://stad.gent/nl/reglementen/algemeen-reglement-op-de-gemeentelijke-administratieve-sancties" target="_blank" rel="noopener">
+            <strong>Algemeen GAS-reglement</strong>
+            <span>Officiële reglementpagina</span>
+          </a>
+
+          <a class="linkitem" href="https://www.gegevensbeschermingsautoriteit.be/" target="_blank" rel="noopener">
+            <strong>Gegevensbeschermingsautoriteit (GBA)</strong>
+            <span>Privacy / persoonsgegevens</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div style="margin-top:14px;">
+        Opmerking: dit is een informatief naslagwerk. Voor bindende regels gelden de officiële publicaties van Stad Gent/IVAGO.
+      </div>
+    </footer>
+  </div>
 </body>
 </html>
